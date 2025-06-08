@@ -267,7 +267,7 @@ void printContainer(T* container, int size)
 }
 
 template<typename T>
-T binarySearch(T x, T* container, int size)
+int binarySearch(T x, T* container, int size)
 {
     if (!container) return -1;
 
@@ -276,9 +276,9 @@ T binarySearch(T x, T* container, int size)
     {
         int mid = (l + r) / 2;
 
-        if (x > container[mid]) l = mid;
-        else if (x < container[mid]) r = mid;
-        else return container[mid]; 
+        if (x > container[mid]) l = mid + 1;
+        else if (x < container[mid]) r = mid - 1;
+        else return mid; 
     }
     while (l <= r);
 
@@ -329,7 +329,7 @@ int main()
     heapSort(container, N);
     printContainer(container, N);
 
-    std::cout << "Found : " << binarySearch(5, container, N) << '\n'; 
+    std::cout << "Found 5 on index: " << binarySearch(5, container, N) << '\n'; 
 
     delete[] container;
     container = nullptr;
