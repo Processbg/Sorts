@@ -267,20 +267,19 @@ void printContainer(T* container, int size)
 }
 
 template<typename T>
-int binarySearch(T x, T* container, int size)
+int binarySearch(T x, const T* container, int size)
 {
     if (!container) return -1;
 
     int l = 0, r = size - 1;
-    do
+    while (l <= r)
     {
-        int mid = (l + r) / 2;
+        int mid = l + (r - l) / 2;
 
         if (x > container[mid]) l = mid + 1;
         else if (x < container[mid]) r = mid - 1;
         else return mid; 
     }
-    while (l <= r);
 
     return -1;
 }
