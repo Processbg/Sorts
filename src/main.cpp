@@ -146,7 +146,7 @@ void mergeSort(T* container, int l, int r)
     if (!container) return;
     if (r <= l) return;
 
-    int m = (r + l) / 2;
+    int m = l + (r - l) / 2;
 
     mergeSort(container, l, m);
     mergeSort(container, m + 1, r);
@@ -254,7 +254,7 @@ void inputContainer(T* container, int size)
 }
 
 template<typename T>
-void printContainer(T* container, int size)
+void printContainer(const T* container, int size)
 {
     if (!container) return;
 
@@ -328,7 +328,16 @@ int main()
     heapSort(container, N);
     printContainer(container, N);
 
-    std::cout << "Found 5 on index: " << binarySearch(5, container, N) << '\n'; 
+    std::cout << "Type value to find:\n";
+    
+    int value;
+    std::cin >> value;
+    
+    int foundIndex = binarySearch(value, container, N);
+    if (foundIndex < 0)
+        std::cout << value << " is not found.\n";
+    else
+        std::cout << "Found " << value << " on index: " << foundIndex << '\n'; 
 
     delete[] container;
     container = nullptr;
